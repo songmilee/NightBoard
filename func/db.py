@@ -11,6 +11,9 @@ def connectDB():
     #return connection to other files
     return curs
 
+def commit():
+    conn.commit()
+
 #connection out
 def connectOut():
     global conn

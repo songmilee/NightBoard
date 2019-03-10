@@ -1,8 +1,14 @@
 import os
-import slist as sl
+import ppd
 from time import sleep
 
+pd = None
+
 def main(args=None):
+    global pd
+
+    pd = ppd.PPD()
+
     while(True):
         #display clear
         os.system("clear")
@@ -30,9 +36,12 @@ def main(args=None):
         
         
 def menuFunc(num):
+    global pd
 
     if num == 1:
-        sl.showList()
+        pd.showList()
+    elif num == 2:
+        pd.addData()
     else:
         print("%d selected" % num)
 
