@@ -50,3 +50,42 @@ class PPD:
         db.commit()
 
         print("Data Inserted")
+
+    def modifyData(self):
+        os.system('clear')
+
+        id = input("Enter ID number > ")
+
+        sql = "select * from member where mem_no=%s"
+        self.cur.execute(sql, id)
+
+        row = self.cur.fetchall()
+
+        if(row == 0):
+            print("You Enter the Wrong id")
+        else:
+            print("Which one do you want to change")
+            change_menu = input("1. name 2. address > ")
+
+            change_menu = int(change_menu)
+
+            if change_menu == 1:
+                name  = input("Enter your name > ")
+
+                if name != "":
+                    sql = "update member set mem_name=%s where mem_no=%s"
+                    self.cur.execute(sql, (name, id))
+                    db.commit()
+                    print("Data updated")
+            elif change_menu == 2:
+                address = input("Enter your address > ")
+
+                if address != "":
+                    sql = "update member set mem_address=%s where mem_no=%s"
+                    self.cur.execute(sql, (address, id))
+                    db.commit()
+                    print("Data updated")
+            else:
+                print("Wrong Menu")
+                
+
