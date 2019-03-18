@@ -29,6 +29,26 @@ class PPD:
         for i in rows:
             print(i[6], i[0])
 
+    def deleteData(self):
+        os.system('clear')
+
+        id = input("Enter ID Number > ")
+
+        sql = "select * from member where mem_no=%s"
+        self.cur.execute(sql, id)
+
+        row = self.cur.fetchall()
+
+        if(row == 0):
+            print("You Enter the Wrong ID")
+        else:
+            sql = "delete from member where mem_no=%s"
+
+            self.cur.execute(sql, id)
+            db.commit()
+
+            print("Data Deleted")
+
     def addData(self):
         os.system('clear')
 

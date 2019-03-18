@@ -42,6 +42,10 @@ def menuFunc(num):
         pd.showList()
     elif num == 2:
         pd.addData()
+    elif num == 3:
+        pd.modifyData()
+    elif num == 4:
+        pd.deleteData()
     else:
         print("%d selected" % num)
 
