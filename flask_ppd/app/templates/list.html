@@ -7,7 +7,36 @@
     {% include "partial/navbar.html" %}
 
     <div class="content">
-        <h1>List Page </h1>
+        <table class="striped centered responsive-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Birth</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Test1</td>
+                    <td>Female</td>
+                    <td>1999-01-01</td>
+                    <td>Test1</td>
+                </tr>
+                {% for i in users %}
+                    <tr>
+                        <td>{{ i.mem_no }}</td>
+                        <td>{{ i.mem_name }}</td>
+                        <td>{{ i.mem_sex }}</td>
+                        <td>{{ i.mem_year }}</td>
+                        <td>{{ i.mem_address }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
     </div>
 
     {% include "partial/js.html" %}
