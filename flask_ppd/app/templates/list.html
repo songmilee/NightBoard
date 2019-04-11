@@ -7,36 +7,50 @@
     {% include "partial/navbar.html" %}
 
     <div class="content">
-        <table class="striped centered responsive-table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Birth</th>
-                    <th>Address</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Test1</td>
-                    <td>Female</td>
-                    <td>1999-01-01</td>
-                    <td>Test1</td>
-                </tr>
-                {% for i in users %}
-                    <tr>
-                        <td>{{ i.mem_no }}</td>
-                        <td>{{ i.mem_name }}</td>
-                        <td>{{ i.mem_sex }}</td>
-                        <td>{{ i.mem_year }}</td>
-                        <td>{{ i.mem_address }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+                {% if users|length > 0%}
+                    <table class="striped centered responsive-table">
+                        <colgroup>
+                            <col width="10%"/>
+                            <col width="20%"/>
+                            <col width="10%"/>
+                            <col width="20%"/>
+                            <col width="*"/>
+                            <col width="10%"/>
+                            <col width="10%"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Sex</th>
+                                <th>Birth</th>
+                                <th>Address</th>
+                                <th>Modify</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in users %}
+                            <tr>
+                                <td>{{ i.mem_no }}</td>
+                                <td>{{ i.mem_name }}</td>
+                                {% if i.mem_sex == 1 %}
+                                    <td>Female</td>
+                                {% else %}
+                                    <td>Male</td>
+                                {% endif %}
+                                <td>{{ i.mem_year }}/{{ i.mem_month }}/{{ i.mem_day }}</td>
+                                <td>{{ i.mem_address }}</td>
+                                <td><a class="waves-effect waves-light btn">Modify</a></td>
+                                <td><a class="waves-effect waves-light btn red">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>  
+                    </table>
+                {% else %}
+                    <h3>데이터가 없습니다.</h3>
+                {% endif %}
             
-        </table>
     </div>
 
     {% include "partial/js.html" %}
