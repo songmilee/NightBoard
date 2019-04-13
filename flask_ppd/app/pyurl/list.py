@@ -14,3 +14,16 @@ class List(Resource):
         sql = "select * from member"
         rows = db.executeAll(sql)
         return make_response(render_template('list.html', users=rows), 200)
+
+    def delete(self, id):
+        db = data.Database()
+
+        sql = "delete from member where mem_no=%s" % (id)
+
+        rows = db.execute(sql)
+
+        if rows != 0:
+            db.commit()
+            return { "result" : "1"} #Success
+        
+        return { "result" : "0"} #Failed

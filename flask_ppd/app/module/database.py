@@ -8,10 +8,10 @@ class Database():
                                     db='wilog', 
                                     charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
-
     
     def execute(self, query, args={}):
         self.cursor.execute(query, args)
+        return self.cursor.rowcount
     
     def executeOne(self, query, args={}):
         self.cursor.execute(query, args)
@@ -23,5 +23,5 @@ class Database():
         row = self.cursor.fetchall()
         return row
 
-    def commit():
+    def commit(self):
         self.db.commit()

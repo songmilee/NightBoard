@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% include "partial/head.html"  %}
+    (% include "partial/head.html"  %)
 </head>
 <body>
-    {% include "partial/navbar.html"%}
+    (% include "partial/navbar.html"%)
     
     <div class="content">
         <h1>Welcome</h1>
-        <br><br><br>
-        <span>This is PPD MAIN PAGE</span>
+        <div id="app">
+            <h3>{{ message }}</h3>
+        </div>
     </div>
 
-    {% include "partial/js.html" %}
+    (% include "partial/js.html" %)
 </body>
 </html>

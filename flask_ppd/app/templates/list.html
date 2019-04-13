@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% include "partial/head.html" %}
+    (% include "partial/head.html" %)
 </head>
 <body>
-    {% include "partial/navbar.html" %}
+    (% include "partial/navbar.html" %)
 
     <div class="content">
-                {% if users|length > 0%}
+                (% if users|length > 0%)
                     <table class="striped centered responsive-table">
                         <colgroup>
                             <col width="10%"/>
@@ -30,29 +30,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for i in users %}
+                        (% for i in users %)
                             <tr>
-                                <td>{{ i.mem_no }}</td>
-                                <td>{{ i.mem_name }}</td>
-                                {% if i.mem_sex == 1 %}
+                                <td>(( i.mem_no ))</td>
+                                <td>(( i.mem_name ))</td>
+                                (% if i.mem_sex == 1 %)
                                     <td>Female</td>
-                                {% else %}
+                                (% else %)
                                     <td>Male</td>
-                                {% endif %}
-                                <td>{{ i.mem_year }}/{{ i.mem_month }}/{{ i.mem_day }}</td>
-                                <td>{{ i.mem_address }}</td>
+                                (% endif %)
+                                <td>(( i.mem_year ))/(( i.mem_month ))/(( i.mem_day ))</td>
+                                <td>(( i.mem_address ))</td>
                                 <td><a class="waves-effect waves-light btn">Modify</a></td>
                                 <td><a class="waves-effect waves-light btn red">Delete</a></td>
                             </tr>
-                        {% endfor %}
+                        (% endfor %)
                         </tbody>  
                     </table>
-                {% else %}
+                (% else %)
                     <h3>데이터가 없습니다.</h3>
-                {% endif %}
+                (% endif %)
             
     </div>
 
-    {% include "partial/js.html" %}
+    (% include "partial/js.html" %)
 </body>
 </html>
