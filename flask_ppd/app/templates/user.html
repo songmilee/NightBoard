@@ -4,25 +4,25 @@
 <body>
     (% include "partial/navbar.html" %)
     <div class="content">
-        <div class="row">
+        <div class="row" id="user">
             <from action="#" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="mem_name" type="text" class="validate">
+                        <input id="mem_name" type="text" ref="mem_name" class="validate" required>
                         <label for="mem_name">Name</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="mem_address" type="text" class="validate">
+                        <input id="mem_address" type="text" class="validate" required>
                         <label for="mem_address">Address</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="mem_birth" type="text" class="datepicker">
+                        <input id="mem_birth" type="text" class="datepicker" required>
                         <label for="mem_birth">Birth</label>
                     </div>
                 </div>
@@ -32,13 +32,13 @@
                         <div class="row">
                             <div class="col s4">
                                 <label>
-                                    <input class="with-gap" name="mem_sex" type="radio" checked />
+                                    <input v-model="mem_sex" class="with-gap" name="sex" type="radio" v-bind:value="'0'" checked />
                                     <span>Male</span>
                                 </label>
                             </div>
                             <div class="col s4">
                                 <label>
-                                    <input class="with-gap" name="mem_sex" type="radio" />
+                                    <input v-model="mem_sex" class="with-gap" name="sex" type="radio" v-bind:value="'1'" />
                                     <span>Female</span>
                                 </label>
                             </div>                            
@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="row right-align">
-                    <button class="btn red">Cancel</button>
-                    <button class="btn">Add User</button>
+                    <button class="btn red" v-on:click="cancelUser">Cancel</button>
+                    <button class="btn" v-on:click="addUser">Add User</button>
                 </div>
             </from>
         </div>
