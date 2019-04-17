@@ -1,3 +1,5 @@
+var base_url = "localhost:5000/";
+
 var app = new Vue({
     el: '#app',
     data:  {
@@ -15,36 +17,23 @@ var navbar = new Vue({
 var user = new Vue({
   el : '#user',
   data : {
-    mem_name : '',
-    mem_address : '',
-    mem_birth : '',
     mem_sex : '0',
-    posts : []
+    member : []
    },
   methods : {
     addUser : function(event){
-      this.mem_name = document.querySelector("input[id=mem_name]").value
-      this.mem_address = document.querySelector("input[id=mem_address]").value
-      this.mem_birth = document.querySelector("input[id=mem_birth]").value
-
-
-      fetch('https://jsonplaceholder.typicode.com/posts/1')
-      .then((response)=>{
-        if(response.ok){
-          return response.json();
-        }
-        throw new Error('Network response was not ok')  
-      })
-      .then((json)=>{
-        this.posts.push({
-          userId : json.userId,
-          title: json.title,
-          body: json.body
-        });
-        console.log(this.posts)
-      })
-      .catch((error)=>{
-        console.log(error);
+      this.member.push({
+          mem_name :  document.querySelector("input[id=mem_name]").value,
+          mem_address : document.querySelector("input[id=mem_address]").value,
+          mem_birth : document.querySelector("input[id=mem_birth]").value,
+          mem_sex : this.mem_sex
+      });
+      console.log(this.member)
+      axios.post(base_url+"user", this.member)
+      .then(repsone => {
+        console.log(repsone);
+      }).catch((err)=>{
+        console.log(err);
       });
     },
 
@@ -64,5 +53,10 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    selectMonths: true,
+    yearRange : 100,
+    format : 'yyyy-m-dd'
+  });
+  
 });
