@@ -1,4 +1,10 @@
-var base_url = "localhost:5000/";
+const base_url = "localhost:5000/";
+
+const config = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
 
 var app = new Vue({
     el: '#app',
@@ -23,15 +29,16 @@ var user = new Vue({
   methods : {
     addUser : function(event){
       this.member.push({
-          mem_name :  document.querySelector("input[id=mem_name]").value,
-          mem_address : document.querySelector("input[id=mem_address]").value,
-          mem_birth : document.querySelector("input[id=mem_birth]").value,
-          mem_sex : this.mem_sex
+          'mem_name' :  document.querySelector("input[id=mem_name]").value,
+          'mem_address' : document.querySelector("input[id=mem_address]").value,
+          'mem_birth' : document.querySelector("input[id=mem_birth]").value,
+          'mem_sex' : this.mem_sex
       });
-      console.log(this.member)
-      axios.post(base_url+"user", this.member)
+      
+      axios.post("/user", this.member, config)
       .then(repsone => {
         console.log(repsone);
+        alert(repsone);
       }).catch((err)=>{
         console.log(err);
       });
