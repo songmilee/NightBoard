@@ -1,11 +1,5 @@
 const base_url = "localhost:5000/";
 
-const config = {
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-}
-
 var app = new Vue({
     el: '#app',
     data:  {
@@ -24,24 +18,42 @@ var user = new Vue({
   el : '#user',
   data : {
     mem_sex : '0',
-    member : []
    },
   methods : {
     addUser : function(event){
-      this.member.push({
-          'mem_name' :  document.querySelector("input[id=mem_name]").value,
-          'mem_address' : document.querySelector("input[id=mem_address]").value,
-          'mem_birth' : document.querySelector("input[id=mem_birth]").value,
-          'mem_sex' : this.mem_sex
-      });
+
+      name = document.querySelector("input[id=mem_name]").value;
+      address = document.querySelector("input[id=mem_address]").value;
+      birth = document.querySelector("input[id=mem_birth]").value;
+
+      /**
+       * Input 값 null 체크
+       */
+      if(!name){
+        alert("이름을 채워주세요");
+      } else if(!address){
+        alert("주소를 채워주세요");
+      } else if(!birth) {
+        alert("생일을 입력해주세요.")
+      }
       
-      axios.post("/user", this.member, config)
-      .then(repsone => {
-        console.log(repsone);
-        alert(repsone);
-      }).catch((err)=>{
-        console.log(err);
-      });
+      /**
+       * 서버로 데이터 전송
+       */
+      if(name && address && birth){
+        axios.post("/user", {
+          'mem_name' :  name,
+          'mem_address' : address,
+          'mem_birth' : birth,
+          'mem_sex' : this.mem_sex
+        })
+        .then(repsone => {
+          console.log(repsone);
+          alert(repsone);
+        }).catch((err)=>{
+          console.log(err);
+        });
+      }
     },
 
     cancelUser : function(event){

@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_restful import Api
-from flask_cors import CORS
 
 import os
 
@@ -25,10 +24,6 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_PATH = os.path.join(ROOT_PATH, 'static')
 
 app = ConfigFlask(__name__, static_folder=STATIC_PATH, static_url_path='')
-cors = CORS(app, resources={
-    r"/user/*" : {"origin" : "*"},
-    r"/list/*" : {"origin" : "*"},
-})
 api = Api(app=app)
 
 #set app url
