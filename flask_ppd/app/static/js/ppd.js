@@ -14,6 +14,23 @@ var navbar = new Vue({
     },
 })
 
+var list = new Vue({
+  el : '#list',
+  methods: {
+    deleteUser : function(val){
+        console.log(val);
+
+        axios.delete("/list", { 
+          data : {    'mem_id' : val   }
+        }).then(res =>{
+          console.log(res);
+        }).catch(err=>{
+          console.log(err);
+        });
+    }
+  }
+});
+
 var user = new Vue({
   el : '#user',
   data : {
@@ -49,8 +66,22 @@ var user = new Vue({
         })
         .then(repsone => {
           console.log(repsone);
-          alert(repsone);
+          //alert(repsone);
+          
+          result = repsone.data.result;
+          if(result == "1"){
+            alert("Success");
+          }else{
+            error = repsone.data.error;
+            alert(error);
+          }
+
+          document.querySelector("input[id=mem_name]").value="";
+          document.querySelector("input[id=mem_address]").value="";
+          document.querySelector("input[id=mem_birth]").value="";
+
         }).catch((err)=>{
+          alert("Internal Error Occured");
           console.log(err);
         });
       }

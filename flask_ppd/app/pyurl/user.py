@@ -15,7 +15,7 @@ class User(Resource):
             parser.add_argument('mem_birth', required=True)
             
             args = parser.parse_args()
-            print(args)
+            
             mem_name = args['mem_name']
             mem_address = args['mem_address']
             mem_sex = args['mem_sex']

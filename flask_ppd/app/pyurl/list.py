@@ -1,4 +1,4 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from flask import make_response, render_template
 
 import os
@@ -15,15 +15,24 @@ class List(Resource):
         rows = db.executeAll(sql)
         return make_response(render_template('list.html', users=rows), 200)
 
-    def delete(self, id):
-        db = data.Database()
+    def delete(self):
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('mem_id', required=True)
 
-        sql = "delete from member where mem_no=%s" % (id)
+            args = parser.parse_args()
+            
+            print(args)
+            id = args['mem_id']
 
-        rows = db.execute(sql)
+            db = data.Database()
 
-        if rows != 0:
-            db.commit()
-            return { "result" : "1"} #Success
-        
-        return { "result" : "0"} #Failed
+            sql = "delete from member where mem_no=%s" % (id)
+
+            rows = db.execute(sql)
+
+            if rows != 0:
+                db.commit()
+                return { "result" : "1"} #Success
+        except Exception as e:
+            return { "result" : "0", "error" : str(e)} #Failed

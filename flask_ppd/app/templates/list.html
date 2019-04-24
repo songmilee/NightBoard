@@ -6,7 +6,7 @@
 <body>
     (% include "partial/navbar.html" %)
 
-    <div class="content">
+    <div class="content" id="list">
                 (% if users|length > 0%)
                     <table class="striped centered responsive-table">
                         <colgroup>
@@ -41,8 +41,8 @@
                                 (% endif %)
                                 <td>(( i.mem_year ))/(( i.mem_month ))/(( i.mem_day ))</td>
                                 <td>(( i.mem_address ))</td>
-                                <td><a class="waves-effect waves-light btn">Modify</a></td>
-                                <td><a class="waves-effect waves-light btn red">Delete</a></td>
+                                <td><button class="waves-effect waves-light btn">Modify</button></td>
+                                <td><button class="waves-effect waves-light btn red" @click="deleteUser('((i.mem_no))')">Delete</button></td>
                             </tr>
                         (% endfor %)
                         </tbody>  
